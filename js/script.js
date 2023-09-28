@@ -1,18 +1,19 @@
-const signInForm = document.querySelector(".sign-in-form");
-const signUpForm = document.querySelector(".sign-up-form");
+const registerForm = document.querySelector(".register-form");
+const loginForm = document.querySelector(".login-form");
+const signInLink = document.querySelector("#sign-in-link");
+const signUpLink = document.querySelector("#sign-up-link");
 
-signInForm.classList.add("active");
-signUpForm.classList.add("inactive");
-
-const signInButton = document.querySelector(".sign-in-form button");
-const signUpButton = document.querySelector(".sign-up-form button");
-
-signInButton.addEventListener("click", () => {
-  signInForm.classList.add("active");
-  signUpForm.classList.add("inactive");
+signInLink.addEventListener("click", () => {
+  registerForm.classList.toggle("flip");
+  loginForm.classList.toggle("flip");
+  registerForm.classList.add("none");
+  loginForm.classList.remove("none");
 });
 
-signUpButton.addEventListener("click", () => {
-  signInForm.classList.remove("active");
-  signUpForm.classList.remove("inactive");
+signUpLink.addEventListener("click", () => {
+  loginForm.classList.add("none");
+  registerForm.classList.remove("none");
+  registerForm.classList.toggle("flip");
+  loginForm.classList.toggle("flip");
 });
+

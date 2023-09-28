@@ -1,3 +1,20 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background: #000000;
+  background: linear-gradient(to right, #57a6a1, #86a8e7, #7f7fd5);
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -7,9 +24,26 @@
   padding: 20px;
   border-radius: 20px;
   position: relative;
+  perspective: 1000px;
   margin: 0 auto;
+  transition: 1ms ease-in-out;
+  -webkit-transition: 1ms ease-in-out;
+  -moz-transition: 1ms ease-in-out;
+  -ms-transition: 1ms ease-in-out;
+  -o-transition: 1ms ease-in-out;
 }
 
+.form.flip {
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+  -moz-transform: rotateY(360deg);
+  -ms-transform: rotateY(360deg);
+  -o-transform: rotateY(360deg);
+}
+
+.none {
+  display: none;
+}
 .title {
   font-size: 28px;
   color: royalblue;
@@ -74,7 +108,7 @@
 
 .form label .input {
   width: 100%;
-  padding: 10px 10px 20px 10px;
+  padding: 10px 0px 20px 0px;
   outline: 0;
   border: 1px solid rgba(105, 105, 105, 0.397);
   border-radius: 10px;

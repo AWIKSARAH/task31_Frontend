@@ -8,10 +8,10 @@
   </head>
   <body>
     <!-- Register Form -->
-    <form class="form">
+    <form class="form register-form none">
       <p class="title">Register</p>
       <label>
-        <input required placeholder="" type="text" class="input" />
+        <input required placeholder="" id="name" type="text" class="input" />
         <span>Full Name</span>
       </label>
 
@@ -25,9 +25,43 @@
         <span>Password</span>
       </label>
 
-      <button class="submit">Submit</button>
-      <p class="signin">Already have an acount ? <a href="#">Signin</a></p>
+      <button class="submit" id="register-btn">Submit</button>
+      <p class="signin switch-animation">
+        Alredy have an acount ? <a href="#" id="sign-in-link">SignIn</a>
+      </p>
     </form>
+
+    <!-- Login Form -->
+    <form class="form login-form">
+      <p class="title">Log In</p>
+
+      <label>
+        <input placeholder="" id="login-email" type="email" class="input" />
+        <span>Email</span>
+      </label>
+
+      <label>
+        <input
+          placeholder=""
+          id="login-password"
+          type="password"
+          class="input"
+        />
+        <span>Password</span>
+      </label>
+
+      <button class="submit" id="login-btn">Submit</button>
+      <p class="signin switch-animation">
+        Don't have an acount ? <a href="#" id="sign-up-link">SignUp</a>
+      </p>
+    </form>
+
+    <!-- Sign in Link -->
+
+    <script src="./js/checktoken.js"></script>
+    <script src="./js/route.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/signup.js"></script>
   </body>
 </html>

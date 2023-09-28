@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add New Blog</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style/layout.css" />
+    <link rel="stylesheet" href="style/nav.css" />
+    <link rel="stylesheet" href="style/style.css" />
+    <link rel="stylesheet" href="style/blogpost.css" />
+    <link rel="stylesheet" href="style/home.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="nav">
+        <div class="toggle-header">
+          <h1>Blogging Platform</h1>
+        </div>
+        <div class="link">
+          <ul>
+            <li class="active"><a href="home.html">Home</a></li>
+            <li><a href="postblog.html">Post Blog</a></li>
+            <li><a href="#" class="logout">Sign Out </a></li>
+          </ul>
+        </div>
+
+        <div class="toggle">&#926;</div>
+      </div>
+      <div class="addPost">
+        <button id="toggle-add">Add New Blog</button>
+      </div>
+      <div class="none formpost">
+        <form action="/api/blogs" class="contentform" method="post">
+          <h1 class="title-form-post">Add New Blog!</h1>
+          <input type="text" name="title" placeholder="Title" required />
+
+          <textarea
+            name="description"
+            required
+            placeholder="Description"
+            aria-required="true"
+          ></textarea>
+          <input type="file" name="image" required />
+          <select name="category_id" required>
+            <option value="">Select a category</option>
+          </select>
+          <input type="submit" value="Submit" />
+          <input type="button" class="cancel" value="Cancel" />
+        </form>
+      </div>
+      <div class="container" style="margin-top: 0">
+        <div class="cart blog-cart-container"></div>
+      </div>
+    </div>
+    <script src="./js/route.js"></script>
+    <script src="./js/mapBlog.js"></script>
+    <script src="./js/signout.js"></script>
+
+    <script>
+      const toggleAdd = document.querySelector("#toggle-add");
+      const cancel = document.querySelector(".cancel");
+      const form = document.querySelector(".formpost");
+      const container = document.querySelector(".container");
+      const token = localStorage.getItem("token");
+      async function fetchBlogPosts(query) {
+        if (!query) {
+          query = "";
+        }
+        const response = await fetch(`http://localhost:5000/api/blog/me/`, {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!response) {
+          throw new Error("Failed to fetch blog posts");
+        }
+        if (response.status === 401) {
+          window.location.replace("/");
+        }
+
+        const blogPosts = await response.json();
+
+        createBlogPostCards(blogPosts.blogs);
+      }
+
+      toggleAdd.addEventListener("click", () => {
+        form.classList.remove("none");
+        alert("E");
+      });
+      async function fetchCategories() {
+        const response = await fetch("http://localhost:5000/api/category");
+        const categories = await response.json();
+        const dropdown = document.querySelector("select");
+        dropdown.setAttribute("name", "category");
+
+        for (const category of categories.response) {
+          const option = document.createElement("option");
+          option.setAttribute("value", category._id);
+          option.textContent = category.name;
+
+          dropdown.appendChild(option);
+        }
+      }
+
+      fetchCategories();
+
+      cancel.addEventListener("click", () => {
+        form.classList.add("none");
+      });
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const title = form.querySelector("input[name='title']").value;
+        const description = form.querySelector(
+          "textarea[name='description']"
+        ).value;
+        const image = form.querySelector("input[name='image']").files[0];
+        const category = form.querySelector("select[name='category']").value;
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("blog", image);
+        formData.append("category", category);
+
+        const response = await fetch("http://localhost:5000/api/blog", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+          body: formData,
+        });
+
+        if (response.status === 201 || response.status === 200) {
+          window.location.href = "/";
+        } else {
+          alert("There was an error creating the blog");
+        }
+      });
+
+      let cache;
+
+      fetchBlogPosts();
+    </script>
+  </body>
+</html>
