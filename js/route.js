@@ -10,12 +10,12 @@ const routes = {
   },
 };
 
-window.addEventListener("hashchange", function (e) {
+window.addEventListener("change", function (e) {
   const hash = window.location.hash;
 
   if (!checkToken()) {
     alert("You Need Access !!");
-    window.location.replace("#login");
+    window.location.replace("/");
   }
 
   if (routes[hash]) {

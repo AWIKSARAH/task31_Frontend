@@ -5,9 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign In / Sign Up</title>
     <link rel="stylesheet" href="./style/style.css" />
+    <link rel="stylesheet" href="style/nav.css" />
   </head>
   <body>
+    <div class="nav">
+      <div class="toggle-header">
+        <h1>Blogging Platform</h1>
+      </div>
+      <div class="link">
+        <ul>
+          <li><a class="active" href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="toggle">&#926;</div>
+    </div>
     <!-- Register Form -->
+
     <form class="form register-form none">
       <p class="title">Register</p>
       <label>
@@ -57,9 +71,8 @@
     </form>
 
     <!-- Sign in Link -->
-
-    <script src="./js/checktoken.js"></script>
     <script src="./js/route.js"></script>
+    <script src="./js/checktoken.js"></script>
     <script src="./js/script.js"></script>
     <script src="./js/auth.js"></script>
     <script src="./js/signup.js"></script>

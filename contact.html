@@ -3,9 +3,160 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact Us</title>
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="style/nav.css" />
+    <link rel="stylesheet" href="style/layout.css" />
+
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      form {
+        width: 500px;
+        margin: 0 auto;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      textarea {
+        height: 100px;
+      }
+
+      button {
+        background-color: #000;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .content-contact {
+        margin-top: 10%;
+      }
+      .content-contact form {
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+
+      .content-contact input,
+      .content-contact textarea {
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .content-contact button {
+        background-color: #000;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .success-message {
+        display: none;
+        color: green;
+        padding: 2%;
+        font-weight: bolder;
+      }
+      .alert {
+        color: red;
+        font-weight: bolder;
+        padding: 2px;
+        display: none;
+      }
+    </style>
   </head>
   <body>
-    <h1>Contact Us</h1>
+    <div class="nav">
+      <div class="toggle-header">
+        <h1>Blogging Platform</h1>
+      </div>
+      <div class="link">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="postblog.html">Post Blog</a></li>
+          <li><a class="active" href="contact.html">Contact Us</a></li>
+          <li><a href="#" class="logout">Sign Out </a></li>
+        </ul>
+      </div>
+
+      <div class="toggle">&#926;</div>
+    </div>
+
+    <div class="content-contact">
+      <h1>Contact Form</h1>
+
+      <form>
+        <input type="text" name="name" placeholder="Name" required />
+
+        <input type="text" name="subject" placeholder="Subject" required />
+
+        <input type="number" name="tel" placeholder="Phone Number" required />
+
+        <textarea name="message" placeholder="Message" required></textarea>
+
+        <div class="success-message">
+          Your message has been sent successfully.
+        </div>
+        <div class="alert"></div>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <script>
+      const contactForm = document.querySelector(".content-contact form");
+
+      contactForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const name = contactForm.querySelector("input[name='name']").value;
+        const tel = contactForm.querySelector("input[name='tel']").value;
+        const subject = contactForm.querySelector(
+          "input[name='subject']"
+        ).value;
+        const message = contactForm.querySelector(
+          "textarea[name='message']"
+        ).value;
+
+        const successMessage = document.querySelector(".success-message");
+        const alertMessage = document.querySelector(".alert");
+        const endpoint = "https://task31backend.onrender.com/api/contact";
+
+        fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, tel, subject, message }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              successMessage.style.display = "block";
+              name.value = "";
+              tel.value = "";
+              message.value = "";
+              subject.value = "";
+            } else {
+              alertMessage.style.display = "block";
+              alertMessage.textContent = data.message;
+            }
+          })
+          .catch((error) => {
+            alertMessage.style.display = "block";
+            alertMessage.textContent = error.message;
+          });
+      });
+    </script>
   </body>
 </html>

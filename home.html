@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Home</title>
     <link rel="stylesheet" href="style/home.css" />
     <link rel="stylesheet" href="style/nav.css" />
   </head>
   <body>
+    <!-- NavBar -->
     <div class="nav">
       <div class="toggle-header">
         <h1>Blogging Platform</h1>
@@ -16,6 +17,7 @@
         <ul>
           <li class="active"><a href="home.html">Home</a></li>
           <li><a href="postblog.html">Post Blog</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
           <li><a href="#" class="logout">Sign Out </a></li>
         </ul>
       </div>
@@ -99,11 +101,11 @@
       </div>
       <div class="toggle">&#926;</div>
     </div>
-
+    <!-- Card container -->
     <div class="container">
       <div class="cart blog-cart-container"></div>
     </div>
-
+    <!-- Category section -->
     <div class="category">
       <h3>Category Group</h3>
       <ul class="list-category"></ul>
@@ -114,6 +116,7 @@
       const searchquery = document.querySelector(".searchInput");
       const searchButton = document.querySelector(".searchButton");
 
+      // Search Functionality
       searchButton.addEventListener("click", async () => {
         if (searchquery.value) {
           const blogs = await fetchBlogPosts({ query: searchquery.value });
@@ -124,6 +127,7 @@
       const container = document.querySelector(".container");
       let cache = {};
 
+      //fetch the blogs
       async function fetchBlogPosts(options = {}) {
         const { query = "", category = "" } = options;
 
@@ -149,6 +153,7 @@
         return blogPosts.data.docs;
       }
 
+      //fetch the category
       async function fetchCategoryCounts() {
         const token = localStorage.getItem("token");
 
@@ -164,6 +169,7 @@
         return categoryCounts;
       }
 
+      //list the category in the category section
       async function renderCategoryList() {
         const listCategory = document.querySelector(".list-category");
         const categoryCounts = await fetchCategoryCounts();
@@ -199,6 +205,7 @@
         }
       }
 
+      //call the function for list the category
       renderCategoryList();
 
       fetchBlogPosts().then((c) => {

@@ -4,9 +4,6 @@ async function createBlogPostCards(blogs) {
 
   blogPosts = blogs;
 
-  console.log("====================================");
-  console.log(blogs);
-  console.log("====================================");
 
   if (blogPosts.length === 0) {
     container.appendChild(document.createTextNode("No Blog yet"));
@@ -70,9 +67,7 @@ async function createBlogPostCards(blogs) {
 
     const cardUserInfoName = document.createElement("h5");
     cardUserInfoName.textContent = blogPost.author.name;
-    console.log("====================================");
-    console.log(blogPost.author.name);
-    console.log("====================================");
+
     cardUserInfo.appendChild(cardUserInfoName);
 
     cardUser.appendChild(cardUserInfo);
@@ -160,7 +155,6 @@ async function createBlogPostCards(blogs) {
 }
 
 const addComment = (text, id, token) => {
-  console.log("Request body:", { text, blog: id });
 
   const blog = id;
   fetch("https://task31backend.onrender.com/api/comment/", {

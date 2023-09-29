@@ -17,7 +17,6 @@ loginButton.addEventListener("click", async (e) => {
     return;
   }
 
-  // Make a POST request to your backend API to log in the user
   try {
     const response = await fetch(
       "https://task31backend.onrender.com/api/auth/user/login",
@@ -33,17 +32,14 @@ loginButton.addEventListener("click", async (e) => {
     const data = await response.json();
 
     if (response.ok) {
-     
       localStorage.setItem("token", data.token);
 
       // Redirect the user to the home page
       window.location.replace("home.html");
     } else {
-      // An error occurred
       alert(data.message);
     }
   } catch (error) {
-    // Handle the error
     alert(error.message);
   }
 });
