@@ -37,7 +37,7 @@ registerButton.addEventListener("click", async (e) => {
 
     if (response.ok) {
       alert(`Welcome in your new world ${name}`);
-      window.location.replace("index.js");
+      window.location.replace("home.html");
     } else {
       alert(data.message);
     }
