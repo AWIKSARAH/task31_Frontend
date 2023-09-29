@@ -91,7 +91,8 @@
       });
       async function fetchCategories() {
         const response = await fetch(
-          "https://task31backend.onrender.com/api/category"
+          "https://task31backend.onrender.com/api/category",
+          { headers: { Authorization: `Bearer ${token}` } }
         );
         const categories = await response.json();
         const dropdown = document.querySelector("select");
