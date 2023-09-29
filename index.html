@@ -30,12 +30,12 @@
       </label>
 
       <label>
-        <input placeholder="" type="email" class="input" />
+        <input placeholder="" type="email" id="email" class="input" />
         <span>Email</span>
       </label>
 
       <label>
-        <input placeholder="" type="password" class="input" />
+        <input placeholder="" type="password" id="password" class="input" />
         <span>Password</span>
       </label>
 
@@ -71,6 +71,27 @@
     </form>
 
     <!-- Sign in Link -->
+
+    <script>
+      const registerForm = document.querySelector(".register-form");
+      const loginForm = document.querySelector(".login-form");
+      const signInLink = document.querySelector("#sign-in-link");
+      const signUpLink = document.querySelector("#sign-up-link");
+
+      signInLink.addEventListener("click", () => {
+        registerForm.classList.toggle("flip");
+        loginForm.classList.toggle("flip");
+        registerForm.classList.add("none");
+        loginForm.classList.remove("none");
+      });
+
+      signUpLink.addEventListener("click", () => {
+        loginForm.classList.add("none");
+        registerForm.classList.remove("none");
+        registerForm.classList.toggle("flip");
+        loginForm.classList.toggle("flip");
+      });
+    </script>
     <script src="./js/checktoken.js"></script>
     <script src="./js/script.js"></script>
     <script src="./js/auth.js"></script>

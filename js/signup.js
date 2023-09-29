@@ -1,8 +1,4 @@
-const registerForm = document.querySelector(".register-form");
-const loginForm = document.querySelector(".login-form");
-
 const registerButton = document.getElementById("register-btn");
-const loginButton = document.getElementById("login-btn");
 
 registerButton.addEventListener("click", async (e) => {
   e.preventDefault();
@@ -40,8 +36,8 @@ registerButton.addEventListener("click", async (e) => {
     const data = await response.json();
 
     if (response.ok) {
-      alert(data.message);
-      window.location.href("index.js");
+      alert(`Welcome in your new world ${name}`);
+      window..location.replace("index.js");
     } else {
       alert(data.message);
     }
